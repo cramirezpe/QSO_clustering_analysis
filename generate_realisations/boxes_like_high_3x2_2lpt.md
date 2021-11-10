@@ -123,7 +123,7 @@ for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600
         body = textwrap.dedent(f'''#!/bin/bash -l
 #SBATCH --partition regular
 #SBATCH --nodes 1
-#SBATCH --time 5
+#SBATCH --time 2
 #SBATCH --job-name binned_corrf_david
 #SBATCH --error {path}/%x-%j.err
 #SBATCH --output {path}/%x-%j.out
