@@ -9,7 +9,7 @@ from pathlib import Path
 import textwrap
 from subprocess import Popen, call
 
-os.umsak(0o022)
+os.umask(0o022)
 
 biases = '', '_bias2', '_bias3'
 
