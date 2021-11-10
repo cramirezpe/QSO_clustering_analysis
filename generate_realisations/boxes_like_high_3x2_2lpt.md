@@ -115,24 +115,24 @@ for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600
         path.mkdir(exist_ok=True)
 
         body = textwrap.dedent(f'''#!/bin/bash -l
-    #SBATCH --partition regular
-    #SBATCH --nodes 1
-    #SBATCH --time 5
-    #SBATCH --job-name binned_corrf_david
-    #SBATCH --error {path}/%x-%j.err
-    #SBATCH --output {path}/%x-%j.out
-    #SBATCH -C haswell
-    #SBATCH -A desi
-    #SBATCH --cpus-per-task=64
+#SBATCH --partition regular
+#SBATCH --nodes 1
+#SBATCH --time 5
+#SBATCH --job-name binned_corrf_david
+#SBATCH --error {path}/%x-%j.err
+#SBATCH --output {path}/%x-%j.out
+#SBATCH -C haswell
+#SBATCH -A desi
+#SBATCH --cpus-per-task=64
 
-    export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-    module unload craype-hugepages2M
-    umask u+rwx,g+rwx,o+rx
+module unload craype-hugepages2M
+umask u+rwx,g+rwx,o+rx
 
-    source activate CoLoRe
+source activate CoLoRe
 
-    srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4
+srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4
         ''')
 
         run_file = path / 'run_corr.sl'
@@ -142,4 +142,5 @@ for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600
         if run_sbatch:
             os.chdir(path)
             retcode = call(f'sbatch {run_file}', shell=True)
+``` 
 --
