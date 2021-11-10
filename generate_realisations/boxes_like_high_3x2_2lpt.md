@@ -73,6 +73,12 @@ ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x
 ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias2/randoms.fits
 
 ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias3/randoms.fits
+
+ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt/randoms_from_cat.fits
+
+ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias2/randoms_from_cat.fits
+
+ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias3/randoms_from_cat.fits
 ```
 
 ## Run corrf
@@ -87,7 +93,7 @@ basedir=Path('/global/cscratch1/sd/cramirez/QSO_clustering_analysis')
 
 rsd=False
 run_sbatch = True
-randoms = 'randoms.fits'
+randoms = 'randoms_from_cat.fits'
 
 rangemin=0.1
 rangemax=200
@@ -106,7 +112,7 @@ for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600
 
     _rsd_string = 'rsd' if rsd else 'norsd'
 
-    output_predir = basedir / 'corrf' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
+    output_predir = basedir / 'corrf_from_cat' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
     output_predir.mkdir(parents=True, exist_ok=True)
 
     npix = 12*nside**2

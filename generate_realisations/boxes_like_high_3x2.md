@@ -68,11 +68,19 @@ for bias in biases:
 # Corrfunc analysis
 ## Make randoms (copy them from lognormal realisations)
 ```bash
+LyaPlotter_colore_to_drq --in-sim /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600 --out-file /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/cat.drq --source 1 --simplified --log-level DEBUG
+
+LyaPlotter_randoms_from_drq --in-cat /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/cat.drq --out-cat /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.drq --factor 1 --log-level DEBUG
+
 LyaPlotter_randoms_from_dndz --dndz_file /global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt --out-cat /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms.fits --zmin 0.8 --zmax 3.79 --factor 1 --log-level DEBUG
 
 ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias2/randoms.fits
 
+ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias2/randoms_from_cat.fits
+
 ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3/randoms.fits
+
+ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600/randoms_from_cat.fits /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3/randoms_from_cat.fits
 ```
 
 ## Run corrf
@@ -87,7 +95,7 @@ basedir=Path('/global/cscratch1/sd/cramirez/QSO_clustering_analysis')
 
 rsd=False
 run_sbatch = True
-randoms = 'randoms.fits'
+randoms = 'randoms_from_cat.fits'
 
 rangemin=0.1
 rangemax=200
@@ -106,7 +114,7 @@ for CoLoRe_box in ('high_3x2_600', 'high_3x2_600_bias2', 'high_3x2_600_bias3'):
 
     _rsd_string = 'rsd' if rsd else 'norsd'
 
-    output_predir = basedir / 'corrf' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
+    output_predir = basedir / 'corrf_from_cat' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
     output_predir.mkdir(parents=True, exist_ok=True)
 
     npix = 12*nside**2
