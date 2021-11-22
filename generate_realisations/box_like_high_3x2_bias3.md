@@ -94,7 +94,7 @@ CoLoRe_files_glob = str(CoLoRe_path / 'out_srcs_s1*')
 randoms_path = CoLoRe_path / randoms
 assert randoms_path.is_file()
 
-_rsd_string = 'rsd' if rsd else 'norsd'
+_rsd_string = 'rsd' if rsd else 'norsd'  # This string was not applied, and therefore results with rsd were saved inside norsd. Changed by hand.
 
 output_predir = basedir / 'corrf' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
 output_predir.mkdir(parents=True, exist_ok=True)
@@ -122,7 +122,7 @@ umask u+rwx,g+rwx,o+rx
 
 source activate CoLoRe
 
-srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4
+srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4 {'--data-norsd' if not rsd else ''}
     ''')
 
     run_file = path / 'run_corr.sl'
