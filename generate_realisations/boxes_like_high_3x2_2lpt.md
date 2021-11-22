@@ -91,16 +91,18 @@ from subprocess import call
 os.umask(0o022)
 basedir=Path('/global/cscratch1/sd/cramirez/QSO_clustering_analysis')
 
-rsd=False
+rsd=True
 run_sbatch = True
 randoms = 'randoms_from_cat.fits'
+data_downsampling=1
+randoms_downsampling=1
 
 rangemin=0.1
 rangemax=200
 N_bins=41
 nside=2
 binmin=0.8
-binmax=0.9
+binmax=2.1
 
 for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600_2lpt_bias3'):
     CoLoRe_path = basedir / 'CoLoRe_boxes' / CoLoRe_box
@@ -110,9 +112,9 @@ for CoLoRe_box in ('high_3x2_600_2lpt', 'high_3x2_600_2lpt_bias2', 'high_3x2_600
     randoms_path = CoLoRe_path / randoms
     assert randoms_path.is_file()
 
-    _rsd_string = 'rsd' if rsd else 'norsd'
+    _rsd_string = 'rsd' if rsd else 'norsd'  # This string was not applied, and therefore results with rsd were saved inside norsd. Changed by hand.
 
-    output_predir = basedir / 'corrf_from_cat' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
+    output_predir = basedir / 'corrf_from_cat_full' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
     output_predir.mkdir(parents=True, exist_ok=True)
 
     npix = 12*nside**2
@@ -138,7 +140,7 @@ umask u+rwx,g+rwx,o+rx
 
 source activate CoLoRe
 
-srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4
+srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLoRe --randoms {str(randoms_path)} --out-dir {str(path)} --log-level DEBUG --nthreads ${{SLURM_CPUS_PER_TASK}} --zmin-covd 0.79 --zmax-covd 3.8 --zstep-covd 0.005 --zmin {binmin} --zmax {binmax} --nside {nside} --pixel-mask {ipix} --min-bin {rangemin} --max-bin {rangemax} --n-bins {N_bins} --compute-npoles 0 2 4 {'--data-norsd' if not rsd else ''} --data-downsampling {data_downsampling} --randoms-downsampling {randoms_downsampling}
         ''')
 
         run_file = path / 'run_corr.sl'
