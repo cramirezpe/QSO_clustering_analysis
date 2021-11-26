@@ -1,3 +1,24 @@
+# 26/11/2021
+## Status:
+Not many updates from César today. Showed the results without downsampling, showing smoother results. Also showed a first version of results with modified input bias to get output bias closer to the target bias.
+
+## Conclusions:
+- Unsure about how large are the errors in Abacus, how large is the simulation and the measurement, volume, etc...
+- The method of fitting the monopole and the quadrupole with a scale factor might work for the monopole, but is extremely wrong for the quadrupole. Should search something else to compare between sims.
+- We need "confident bands" in our measurements to allow us to check how our mocks will behave in a DESI like environment. -> Create confident bands for a DESI-like measurement. This can be achieved by re-scaling the current error bars:
+  - Scaling for area: sky area for a DESI-like survey will be 1/3 of our current measurements, so error bars have a factor sqrt(3) extra.
+  - Scaling for density: our mocks are 10 times denser than DESI. If we are shotnoise limited, we can consider the error being almost linear with the number of objects. Therefore a factor 10 extra.
+- Compute error bars through jacknife instead of rms could help.
+
+## Next steps:
+- [ ] Need table where one can see input_bias vs output_bias. See if there's a pattern there which allow us to know where the output bias will be for a given input bias.
+- [ ] Compute errors using jacknife.
+- [ ] Use DESI-like errors for our measurements.
+- [ ] Share our best mock with the Abacus team and ask them for larger/better(?) Abacus measurements. Or at least precise information about the current measurements.
+- [ ] Pending things:
+  - [ ] Define goals for project (18/11/2021)
+  - [ ] Redshift errors (11/11/2021)
+
 # 18/11/2021
 ## Status:
 - Showed plot comparing the linear model used for CoLoRe paper (without lognormal transformation applied). This shows that SV3 results are too noisy and can't be used now. The "big" difference in abacus results may be caused by different considerations with respect to **redshift errors**. It could be caused by bias, but this would be compensated by a different growth factor.
@@ -20,8 +41,8 @@
   - cross correlation QSO Lya at 1.5
   - 3x2 analyses at high redshift.
 - [ ] Add redshift errors to the plots and models.
-- [ ] Add more galaxies (reduce downsampling).
-- [ ] Try to get an output bias closer to the desired bias, so the correction is smaller. This can be accomplished by painting a bunch of tracers in the simulation (which is almost "free"). 
+- [x] Add more galaxies (reduce downsampling).
+- [x] Try to get an output bias closer to the desired bias, so the correction is smaller. This can be accomplished by painting a bunch of tracers in the simulation (which is almost "free"). 
 
 
 # 11/11/2021
