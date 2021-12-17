@@ -1,3 +1,40 @@
+# 17/12/2021
+- Now all the analyses are run for a narrow redshift bin (1.2-1.6), trying to match the effective bias with the abacus one. 
+- Plot of input bias parameter vs effective bias show inconsistencies for reruns of the same CoLoRe realization. There is a "almost linear" relation between the input bias parameter and the effective bias; but when reruning the same CoLoRe realization this slope changes (even though matter density should be exactly the same).
+- Plots of the monopole and quadrupole show slightly different bias due to the problems described before.  
+
+# Conclusions
+- Need to check what is happening with bias before continuing.
+- 2lpt realization has far less power in the quadrupole than the expected, even though the effectiva bias (measured in the monopole) is really close to the abacus one. Maybe we could contact David Alonso at some point to see what he thinks about it.
+- The fit of the bias should be made in a smaller region (50-80 would be ideal).
+
+# Next steps
+- [ ] Understand what is happening with the unconsistent input bias parameters vs effective bias.
+- [ ] Investigate how the input bias parameters affects the 2lpt quadrupole. (Plotting 2lpt curves for different input bias parameters).
+  - [ ] Interesting to make CoLoRe print the bias normalization value to see if there is something weird going on.
+- [ ] Make fits in 50-80 Mpc/h region.
+
+# 01/12/2021
+## Status
+Now the Abacus measurement includes the combined correlations from 25 realisations. Showed also table with input b vs best bias. Also now jacknife is computed to get estimations. Showed a comparison of the different analysis with a similar output bias. Showed measurements with forced bias=0 to check if RSD effects are controlled.
+
+## Conclusions:
+- "Similar bias" is not enough, we should use the table input b/best bias to get the exact value of input b that we shold use to get an exact value for the best bias on the ranges (30,80) or so.
+- Bias 0 measurements show a small difference between lognormal and 2LPT. This should should not happen in principle as the galaxies are randomly placed in both cases. It will be also prefered to use a very small value of bias to avoid problems in some CoLoRe steps. Also model 2 won't probably work with bias parameter set to 0.
+- Jacknife errorbars should in principle agree with the errors from RMS; in the analysis they seem to be identical, which may be a problem in the code. The DESI-like error bars seem to be too large, maybe this is cause because they are QSOs. It would be better to show shaded bands around abacus sim instead of error bars for all the measurements.
+- Quadrupole differences may arise because bias is not exactly the same, we should try to fix the bias first.
+- Be careful with timing, having one job for each pixel is too much.
+- Abacus is measured in a snapshot, this means that all the measurements are taken at exactly the same redshift (1.4). Trying to implement something similar to this in CoLoRe means:
+  - Putting z=1.5 everythere in CoLoRe. This would be the better option, but we should tune two things: D(z) and f(z) along the code.
+  - Generate a box in a slim redshfit bin, with tunned input dndz so I have a reasonable number density.
+
+## Next steps:
+- [ ] Make runs with exactly the same output bias (by using interpolation), to compare them.
+- [ ] Make runs in a slim redshift bin z=(abacus-0.2, abacus+0.2), with a tuned dndz.
+- [ ] Show error-band instead of multiple error-bars.
+- [ ] Check why bias0 measurements yield small differences (catalog).
+- [ ] Cahnge scripts so I don't have to run a large amount of scripts.
+
 # 26/11/2021
 ## Status:
 Not many updates from César today. Showed the results without downsampling, showing smoother results. Also showed a first version of results with modified input bias to get output bias closer to the target bias.
@@ -11,10 +48,10 @@ Not many updates from César today. Showed the results without downsampling, sho
 - Compute error bars through jacknife instead of rms could help.
 
 ## Next steps:
-- [ ] Need table where one can see input_bias vs output_bias. See if there's a pattern there which allow us to know where the output bias will be for a given input bias.
-- [ ] Compute errors using jacknife.
-- [ ] Use DESI-like errors for our measurements.
-- [ ] Share our best mock with the Abacus team and ask them for larger/better(?) Abacus measurements. Or at least precise information about the current measurements.
+- [x] Need table where one can see input_bias vs output_bias. See if there's a pattern there which allow us to know where the output bias will be for a given input bias.
+- [x] Compute errors using jacknife.
+- [x] Use DESI-like errors for our measurements.
+- [x] Share our best mock with the Abacus team and ask them for larger/better(?) Abacus measurements. Or at least precise information about the current measurements.
 - [ ] Pending things:
   - [ ] Define goals for project (18/11/2021)
   - [ ] Redshift errors (11/11/2021)
