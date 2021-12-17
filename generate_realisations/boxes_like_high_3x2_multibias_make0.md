@@ -1,4 +1,4 @@
-# Boxes with 2LPT features
+# Boxes with lognormal features
 
 I will run boxes for the three biases at the same time with this document.
 
@@ -14,7 +14,7 @@ os.umask(0o022)
 biases = ['_bias3',]
 
 for bias in biases:
-    output_path = Path(os.environ['sc']) / 'QSO_clustering_analysis' / 'CoLoRe_boxes' / f'high_3x2_600_2lpt{bias}_multibias'
+    output_path = Path(os.environ['sc']) / 'QSO_clustering_analysis' / 'CoLoRe_boxes' / f'high_3x2_600{bias}_multibias' / 'bias0'
     output_path.mkdir(exist_ok=True)
     colore_path = Path(f'/global/u2/c/cramirez/Codes/CoLoRe/1.0{bias}/CoLoRe')
 
@@ -34,7 +34,7 @@ for bias in biases:
     r_smooth = 2.0
     smooth_potential = true
     n_grid = 4096
-    dens_type = 2
+    dens_type = 0
     lpt_buffer_fraction = 0.6
     lpt_interp_type = 1
     output_lpt = 0
@@ -48,57 +48,9 @@ for bias in biases:
     ns = 0.9655
     sigma_8 = 0.830
     }}
-    srcs1 = {{
+    srcs8 = {{
     nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.5.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs2 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.7.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs3 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.8.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs4 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.9.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs5 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.0.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs6 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.1.txt"
-    include_shear = false
-    include_lensing = false
-    store_skewers = false
-    gaussian_skewers = false
-    }}
-    srcs7 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.3.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_0.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
@@ -112,12 +64,13 @@ for bias in biases:
 
     call(f'LyaScripts_CoLoRe -o {output_path} -c {colore_path.resolve()} -p {param_file.resolve()} -e CoLoRe --node 32 --run-sbatch', shell=True)
 ```
-Note that srcs8 have been created a posteriori and assigned out_srcs_0*.
 
 # Corrfunc analysis
 ## Make randoms (copy them from lognormal realisations)
 ```bash
-ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias/randoms_from_cat.drq /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias3_multibias/randoms_from_cat.fits
+LyaPlotter_colore_to_drq --in-sim /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias --out-file /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias/cat.drq --source 1 --simplified --log-level DEBUG
+
+LyaPlotter_randoms_from_drq --in-cat /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias/cat.drq --out-cat /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias/randoms_from_cat.drq --factor 1 --log-level DEBUG
 ```
 
 ## Run corrf
@@ -131,7 +84,6 @@ os.umask(0o022)
 basedir=Path('/global/cscratch1/sd/cramirez/QSO_clustering_analysis')
 
 sourcebias = {
-    0: 0,
     1: 2.5,
     2: 2.7,
     3: 2.8,
@@ -141,7 +93,7 @@ sourcebias = {
     7: 3.3
 }
 
-rsd=False
+rsd=True
 run_sbatch = True
 randoms = 'randoms_from_cat.drq'
 data_downsampling=1
@@ -154,8 +106,8 @@ nside=2
 binmin=0.8
 binmax=2.1
 
-for CoLoRe_box in ('high_3x2_600_2lpt_bias3_multibias',):
-    for source in (0,):
+for CoLoRe_box in ('high_3x2_600_bias3_multibias',):
+    for source in (1,):
         CoLoRe_path = basedir / 'CoLoRe_boxes' / CoLoRe_box
         assert CoLoRe_path.is_dir()
         CoLoRe_files_glob = str(CoLoRe_path / f'out_srcs_s{source}*')

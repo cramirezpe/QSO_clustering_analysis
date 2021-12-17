@@ -1,9 +1,5 @@
-# Boxes with 2LPT features
-
-I will run boxes for the three biases at the same time with this document.
-
-# CoLoRe realisations
-```python
+# CoLoRe run
+``` python
 import os
 from pathlib import Path
 import textwrap
@@ -14,7 +10,7 @@ os.umask(0o022)
 biases = ['_bias3',]
 
 for bias in biases:
-    output_path = Path(os.environ['sc']) / 'QSO_clustering_analysis' / 'CoLoRe_boxes' / f'high_3x2_600_2lpt{bias}_multibias'
+    output_path = Path(os.environ['sc']) / 'QSO_clustering_analysis' / 'CoLoRe_boxes' / 'compare_abacus' / f'2lpt{bias}_multibias_try3'
     output_path.mkdir(exist_ok=True)
     colore_path = Path(f'/global/u2/c/cramirez/Codes/CoLoRe/1.0{bias}/CoLoRe')
 
@@ -24,8 +20,8 @@ for bias in biases:
     output_format = "FITS"
     output_density = false
     pk_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/PlanckDR12_kmax_matterpower_z0.dat"
-    z_min = 0.8
-    z_max = 3.79
+    z_min = 1.2
+    z_max = 1.6
     seed = 0
     write_pred = false
     pred_dz = 0.1
@@ -49,56 +45,72 @@ for bias in biases:
     sigma_8 = 0.830
     }}
     srcs1 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.5.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_1.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs2 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.7.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_2.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs3 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.8.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_3.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs4 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_2.9.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_4.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs5 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.0.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_5.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs6 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.1.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_6.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
     gaussian_skewers = false
     }}
     srcs7 = {{
-    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600.txt"
-    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/high_3x2_600_multibias/Bz_qso_G18_3.3.txt"
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_7.txt"
+    include_shear = false
+    include_lensing = false
+    store_skewers = false
+    gaussian_skewers = false
+    }}
+    srcs8 = {{
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_8.txt"
+    include_shear = false
+    include_lensing = false
+    store_skewers = false
+    gaussian_skewers = false
+    }}
+    srcs9 = {{
+    nz_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/dndz.txt"
+    bias_filename = "/global/project/projectdirs/desi/users/cramirez/QSO_clustering_analysis/input_files/compare_abacus/biases_lpt_try3/bias_9.txt"
     include_shear = false
     include_lensing = false
     store_skewers = false
@@ -112,15 +124,13 @@ for bias in biases:
 
     call(f'LyaScripts_CoLoRe -o {output_path} -c {colore_path.resolve()} -p {param_file.resolve()} -e CoLoRe --node 32 --run-sbatch', shell=True)
 ```
-Note that srcs8 have been created a posteriori and assigned out_srcs_0*.
 
-# Corrfunc analysis
-## Make randoms (copy them from lognormal realisations)
-```bash
-ln -s /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_bias3_multibias/randoms_from_cat.drq /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/high_3x2_600_2lpt_bias3_multibias/randoms_from_cat.fits
+# Catalogs
+``` bash
+ln /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/compare_abacus/logn_bias3_multibias/randoms_from_cat.drq /global/cscratch1/sd/cramirez/QSO_clustering_analysis/CoLoRe_boxes/compare_abacus/2lpt_bias3_multibias_try3/randoms_from_cat.drq
 ```
 
-## Run corrf
+# Run corrf
 ``` python
 import os
 from pathlib import Path
@@ -131,17 +141,18 @@ os.umask(0o022)
 basedir=Path('/global/cscratch1/sd/cramirez/QSO_clustering_analysis')
 
 sourcebias = {
-    0: 0,
-    1: 2.5,
-    2: 2.7,
-    3: 2.8,
-    4: 2.9,
-    5: 3.0,
-    6: 3.1,
-    7: 3.3
+    1: 2,
+    2: 2.01,
+    3: 2.02,
+    4: 2.03,
+    5: 2.04,
+    6: 2.05,
+    7: 2.06,
+    8: 2.07,
+    9: 2.08,
 }
 
-rsd=False
+rsd=True
 run_sbatch = True
 randoms = 'randoms_from_cat.drq'
 data_downsampling=1
@@ -151,12 +162,12 @@ rangemin=0.1
 rangemax=200
 N_bins=41
 nside=2
-binmin=0.8
-binmax=2.1
+binmin=1.2
+binmax=1.6
 
-for CoLoRe_box in ('high_3x2_600_2lpt_bias3_multibias',):
-    for source in (0,):
-        CoLoRe_path = basedir / 'CoLoRe_boxes' / CoLoRe_box
+for CoLoRe_box in ('2lpt_bias3_multibias_try3',):
+    for source in (4,5,6):
+        CoLoRe_path = basedir /  'CoLoRe_boxes' / 'compare_abacus' / CoLoRe_box
         assert CoLoRe_path.is_dir()
         CoLoRe_files_glob = str(CoLoRe_path / f'out_srcs_s{source}*')
 
@@ -165,7 +176,7 @@ for CoLoRe_box in ('high_3x2_600_2lpt_bias3_multibias',):
 
         _rsd_string = 'rsd' if rsd else 'norsd'  # This string was not applied, and therefore results with rsd were saved inside norsd. Changed by hand.
 
-        output_predir = basedir / 'corrf_from_cat_multibias' / f'{sourcebias[source]}' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
+        output_predir = basedir / 'corrf_compare_abacus' / f'{sourcebias[source]}' / CoLoRe_box / f'nside_{nside}' / _rsd_string / f'{rangemin}_{rangemax}_{N_bins}' / f'{binmin}_{binmax}' / '0'
         output_predir.mkdir(parents=True, exist_ok=True)
 
         npix = 12*nside**2
@@ -176,7 +187,7 @@ for CoLoRe_box in ('high_3x2_600_2lpt_bias3_multibias',):
             body = textwrap.dedent(f'''#!/bin/bash -l
 #SBATCH --partition regular
 #SBATCH --nodes 1
-#SBATCH --time 2
+#SBATCH --time 10
 #SBATCH --job-name binned_corrf_david
 #SBATCH --error {path}/%x-%j.err
 #SBATCH --output {path}/%x-%j.out
@@ -201,5 +212,6 @@ srun CoLoRe_corrf_run_correlations --data {CoLoRe_files_glob} --data-format CoLo
             if run_sbatch:
                 os.chdir(path)
                 retcode = call(f'sbatch {run_file}', shell=True)
-``` 
+```
+
 --

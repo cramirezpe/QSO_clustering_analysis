@@ -34,7 +34,7 @@ for bias in biases:
     r_smooth = 2.0
     smooth_potential = true
     n_grid = 4096
-    dens_type = 2
+    dens_type = 0
     lpt_buffer_fraction = 0.6
     lpt_interp_type = 1
     output_lpt = 0
