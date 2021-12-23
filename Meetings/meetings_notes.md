@@ -10,7 +10,9 @@ I am not generating properly the randoms. At some point it will be nice if I can
 Generating randoms for different realisations implies taking as input sources with different bias. Maybe this affects the output. In principle it shouldn't, because the only thing I'm taking from the sources is the redshift distribution.
 
 I also added to the plot a x=y line, which shows that the 2lpt slope seems a little bit more realistic (but not much). If you are interested, the exact best fit for both lines are:
+
 lognormal:      best_bias(b) = 1.49 + 0.16·b
+
 2lpt:           best_bias(b) = 1.04 + 0.38·b
 
 **NEW VERSION OF THE USUAL PLOTS:**
