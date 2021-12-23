@@ -9,10 +9,10 @@
 - The fit of the bias should be made in a smaller region (50-80 would be ideal).
 
 # Next steps
-- [ ] Understand what is happening with the unconsistent input bias parameters vs effective bias.
-- [ ] Investigate how the input bias parameters affects the 2lpt quadrupole. (Plotting 2lpt curves for different input bias parameters).
+- [x] Understand what is happening with the unconsistent input bias parameters vs effective bias.
+- [x] Investigate how the input bias parameters affects the 2lpt quadrupole. (Plotting 2lpt curves for different input bias parameters).
   - [ ] Interesting to make CoLoRe print the bias normalization value to see if there is something weird going on.
-- [ ] Make fits in 50-80 Mpc/h region.
+- [x] Make fits in 50-80 Mpc/h region.
 
 # 01/12/2021
 ## Status
@@ -29,10 +29,10 @@ Now the Abacus measurement includes the combined correlations from 25 realisatio
   - Generate a box in a slim redshfit bin, with tunned input dndz so I have a reasonable number density.
 
 ## Next steps:
-- [ ] Make runs with exactly the same output bias (by using interpolation), to compare them.
-- [ ] Make runs in a slim redshift bin z=(abacus-0.2, abacus+0.2), with a tuned dndz.
-- [ ] Show error-band instead of multiple error-bars.
-- [ ] Check why bias0 measurements yield small differences (catalog).
+- [x] Make runs with exactly the same output bias (by using interpolation), to compare them.
+- [x] Make runs in a slim redshift bin z=(abacus-0.2, abacus+0.2), with a tuned dndz.
+- [x] Show error-band instead of multiple error-bars.
+- [x] Check why bias0 measurements yield small differences (catalog).
 - [ ] Cahnge scripts so I don't have to run a large amount of scripts.
 
 # 26/11/2021
