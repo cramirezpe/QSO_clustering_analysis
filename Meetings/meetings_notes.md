@@ -1,3 +1,38 @@
+# 23/12/21
+**BIAS PARAMETER VS EFFECTIVE BIAS:**
+In the last week we observed inconsistencies in this plot, showing a linear behaviour for all the CoLoRe runs but with different slope (exact same realisation, but rerun with different biases).
+
+I made a new realisation to check if the behaviour was following the previous one and that's the case. In the attached file best_input_biases.png  I show the plot for the last 3 runs. They seem to be consistent.
+![best_input_biases](https://user-images.githubusercontent.com/58682644/147234741-835d7e22-4ca1-4c90-bf9d-47d85face658.png)
+
+I think I have a clue of what happened. At some point during the analysis, I accidentally removed my CoLoRe realisations (rm -rf in the wrong place...), a part from loosing the old CoLoRe boxes I also lost randoms, so I needed to re-generate them again. So maybe one of the following is happening:
+I am not generating properly the randoms. At some point it will be nice if I can show you the code and check that everything is okay.
+Generating randoms for different realisations implies taking as input sources with different bias. Maybe this affects the output. In principle it shouldn't, because the only thing I'm taking from the sources is the redshift distribution.
+
+I also added to the plot a x=y line, which shows that the 2lpt slope seems a little bit more realistic (but not much). If you are interested, the exact best fit for both lines are:
+lognormal:      best_bias(b) = 1.49 + 0.16·b
+2lpt:           best_bias(b) = 1.04 + 0.38·b
+
+**NEW VERSION OF THE USUAL PLOTS:**
+In the attached files monopole.png  and quadrupole.png  I show the usual plot comparing lognormal and 2LPT correlations. Now the fitted range is 50-80 Mpc/h as Marc suggested.
+I've added to the legend the best bias measured. The linear model always have the best bias for abacus (~ 2.07)
+
+![monopole](https://user-images.githubusercontent.com/58682644/147234772-09e4b135-4f03-4124-a01e-3d9c9cf5bfae.png)
+
+![quadrupole](https://user-images.githubusercontent.com/58682644/147234779-d59dcf42-e34f-4efa-923f-81839cb4ec0a.png)
+
+**PLOTS WITH 2LPT MULTIBIAS:**
+Extended version for the previous plots only for 2lpt are in attached files monopole_multibias.png  and quadrupole_multibias.png .
+The input bias range I've chosen is not large enough to show big differences between the different realisations.
+
+![monopole_multibias](https://user-images.githubusercontent.com/58682644/147234798-250a525a-f18d-4488-9bd2-4188768cdc60.png)
+
+![quadrupole_multibias](https://user-images.githubusercontent.com/58682644/147234804-6859bcfd-4c98-4c09-ba1d-fbc823c85b86.png)
+
+**NEXT STEPS:**
+- [ ] I will make another 2lpt realisation with a wider range of input bias and with new randoms. Using this I will be able to tell if the problem we observed in the BIAS PARAMETER VS EFFECTIVE BIAS is caused by re-computing randoms while having a better version of the last plots.
+- [ ] I will try to modify CoLoRe in order to get the mean bias used as normalisation.
+
 # 17/12/2021
 - Now all the analyses are run for a narrow redshift bin (1.2-1.6), trying to match the effective bias with the abacus one. 
 - Plot of input bias parameter vs effective bias show inconsistencies for reruns of the same CoLoRe realization. There is a "almost linear" relation between the input bias parameter and the effective bias; but when reruning the same CoLoRe realization this slope changes (even though matter density should be exactly the same).
