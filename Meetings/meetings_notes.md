@@ -1,3 +1,40 @@
+# 13/01/21
+César generated a new 2LPT run with different randoms to check two things:
+- Whether a realisation with new randoms will still have the same slop in the bias_parameter vs effective_bias plot.
+- Show a plot with a wide range of bias values.
+
+**New 2LPT run**
+This new run has the same properties as the previous ones, in this case I did not run an equivalent lognormal run. The characteristics of the run are the same except for the new biases and new randoms. This run does not seem to be really reliable if one looks at the following results:
+
+**BIAS PARAMETER VS EFFECTIVE**
+I plotted input_bias vs best_bias (effective bias) for this new run (and new randoms) and compared it with previous results (both lognormal and previous 2LPT used the same old randoms).
+
+![biasparvsbias](https://user-images.githubusercontent.com/58682644/149394933-88070331-d68f-4def-8d04-c708022f6c42.png)
+
+The result shows that something is wrong with the realisation. In this case randoms are computed by reading the 2LPT galaxy distribution for the less-biased sources (bias_parameter=2), this choice in principle is irrelevant since all the sources have the same redshift distribution (and the sky distribution is full sky). Marc pointed out that the best way of computing randoms will be by sampling them from the input number density distribution.
+
+This arises the question of whether the randoms are well computed or not. Some of the tests that can be done are:
+- [ ] Pixel occupation histogram. (Should be Poisson -> Gaussian).
+- [ ] Simple distribution plots. (This has been done previously).
+- [ ] Increase randoms. Maybe we can see a trend that shows us that having 1\:1 is not enough for data\:randoms.
+- [ ] Check if there is correlation between two randoms sets (scatter plot of pixel ocupation number for each pixel).
+- [ ] Measure the correlation of one set of randoms using another set of randoms as randoms.
+
+**New 2LPT run multipoles**
+
+![Figure 1](https://user-images.githubusercontent.com/58682644/149395002-84ed47a3-4308-43ca-8f5b-7dc1868e907c.png)
+
+![Figure 2](https://user-images.githubusercontent.com/58682644/149395020-ac3a7776-b5c2-4183-b088-52e91ed4d955.png)
+
+These two plots do not have much sense before we know what causes the problem in the plot input_bias vs best_bias, but they tell us that drastically increasing the value of bias seems to not be enough to explain the differences in the quadrupole. But this may change whenever we fixed the previous issue.
+
+**NEXT STEPS:**
+- [ ] Compute randoms from the input number density distribution.
+- [ ] Check if randoms are ok.
+- [ ] Compute randoms from input distribution.
+- [ ] Extract normalization bias from CoLoRe.
+
+
 # 23/12/21
 **BIAS PARAMETER VS EFFECTIVE BIAS:**
 In the last week we observed inconsistencies in this plot, showing a linear behaviour for all the CoLoRe runs but with different slope (exact same realisation, but rerun with different biases).
@@ -32,7 +69,7 @@ The input bias range I've chosen is not large enough to show big differences bet
 ![quadrupole_multibias](https://user-images.githubusercontent.com/58682644/147234804-6859bcfd-4c98-4c09-ba1d-fbc823c85b86.png)
 
 **NEXT STEPS:**
-- [ ] I will make another 2lpt realisation with a wider range of input bias and with new randoms. Using this I will be able to tell if the problem we observed in the BIAS PARAMETER VS EFFECTIVE BIAS is caused by re-computing randoms while having a better version of the last plots.
+- [x] I will make another 2lpt realisation with a wider range of input bias and with new randoms. Using this I will be able to tell if the problem we observed in the BIAS PARAMETER VS EFFECTIVE BIAS is caused by re-computing randoms while having a better version of the last plots.
 - [ ] I will try to modify CoLoRe in order to get the mean bias used as normalisation.
 
 # 17/12/2021
