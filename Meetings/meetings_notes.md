@@ -1,3 +1,44 @@
+# 27/01/21
+
+Continuing with the problematic 2LPT runs. 
+
+**Check randoms: Redshift distribution**
+
+The redshift distribution compared with the provided input redshift distribution.
+![redshift_distribution](https://user-images.githubusercontent.com/58682644/151341678-405dd03c-649b-4973-b62a-4397d4cdb279.png)
+It is not completely clear that the first plot is consistent with Poisson errors (something to look at). But now we have to understand if it is better to use randoms from dndz or randoms from data. If the (larger) scatter in data comes from cosmological fluctuations, then it is better to use the dndz one; if those fluctuations comes from the fact we are renormalizing (and killing higher scale correlations), we should use randoms from data.
+
+Therefore it is important to understand the behaviour of this normalization.
+
+**Check randoms: Pixel distribution**
+
+The following plot shows the pixel occupation distribution divided by the expected value for this distribution (the x axis is sources per pixel):
+![pixel_occupation_histogram](https://user-images.githubusercontent.com/58682644/151342443-675331b5-046d-43eb-9b7b-7a9df99bd725.png)
+This plot does not show anything problematic.
+
+**BIAS PARAMETER VS EFFECTIVE**
+
+Using different randoms for the same data:
+![Figure 3](https://user-images.githubusercontent.com/58682644/151343378-a8a8f998-c4a5-46a6-a2f1-bbb6082b4cc1.png)
+This shows that using different randoms does not affect significantly the in_b out_b issue.
+
+Adding a new realisation with new data (2LPT from dndz (2)). 
+![new_data_new_randoms](https://user-images.githubusercontent.com/58682644/151343531-bd79d2c4-eb0e-4b92-9bce-88107378484f.png)
+This shows that apparently the problem is not in the way the run was made. 
+
+The last plot is a recomputation of a previous "normal" result:
+![repeat_try6](https://user-images.githubusercontent.com/58682644/151343707-4354f3ba-9915-4eef-8336-bdf29d6bcb9b.png)
+The orange dots are new realisations, they seem consistent with previous results.
+
+Given this last plot, there is the question of whether there is no problem at all: orange, red and green seem to be consistent besides the input_bias=2 point. We should make a realisation with the input values: 2, 2.05, 3, 3.5. Which will show if there is an special issue around 2. We should combine it with the normalization paramater for the same realisation.
+
+**NEXXT STEPS**
+
+- [ ] Check dndz poisson errors.
+- [ ] Check bias normalization evolution in redshift.
+- [ ] New 2LPT realisation with input biases around in_b=2.
+
+
 # 13/01/21
 César generated a new 2LPT run with different randoms to check two things:
 - Whether a realisation with new randoms will still have the same slop in the bias_parameter vs effective_bias plot.
@@ -14,11 +55,11 @@ I plotted input_bias vs best_bias (effective bias) for this new run (and new ran
 The result shows that something is wrong with the realisation. In this case randoms are computed by reading the 2LPT galaxy distribution for the less-biased sources (bias_parameter=2), this choice in principle is irrelevant since all the sources have the same redshift distribution (and the sky distribution is full sky). Marc pointed out that the best way of computing randoms will be by sampling them from the input number density distribution.
 
 This arises the question of whether the randoms are well computed or not. Some of the tests that can be done are:
-- [ ] Pixel occupation histogram. (Should be Poisson -> Gaussian).
-- [ ] Simple distribution plots. (This has been done previously).
-- [ ] Increase randoms. Maybe we can see a trend that shows us that having 1\:1 is not enough for data\:randoms.
-- [ ] Check if there is correlation between two randoms sets (scatter plot of pixel ocupation number for each pixel).
-- [ ] Measure the correlation of one set of randoms using another set of randoms as randoms.
+- [x] Pixel occupation histogram. (Should be Poisson -> Gaussian).
+- [x] Simple distribution plots. (This has been done previously).
+- [x] Increase randoms. Maybe we can see a trend that shows us that having 1\:1 is not enough for data\:randoms.
+- [x] Check if there is correlation between two randoms sets (scatter plot of pixel ocupation number for each pixel).
+- [x] Measure the correlation of one set of randoms using another set of randoms as randoms.
 
 **New 2LPT run multipoles**
 
