@@ -1,6 +1,50 @@
-# 27/01/21
+# 03/02/22
+**Repeating redshift distribution plot**
 
-Continuing with the problematic 2LPT runs. 
+A improvement and correction to the redshift distribution plot shown last week. Now the confidence bars are set around 0, and the data is shown as points. The poisson errors have been corrected (there was a missing factor in the computation).
+
+![normalized_redshfit_distribution](https://user-images.githubusercontent.com/58682644/152420482-87fd5949-eff3-4d12-b006-30be83bda4bf.png)
+
+Now the dndz_randoms are consistent with the prediction (as expected). We should use this randoms from now on.
+
+**Checking again input bias parameter vs effective bias**
+
+New realisations have been made, showing that apparently what we have is a curve instead of a line. Therefore the only conflicting point is the 2.0 one. I made another run of points close to this one, showing no problematic behaviour:
+
+![inb_outb_with_printed_norm](https://user-images.githubusercontent.com/58682644/152420965-a58a426c-fb48-4a6b-bdb1-ed4f2a71a966.png)
+
+It is weird that the only difference between the «2LPT NEW» and the «printed normalization» one is the number of sources included in the simulation.  
+
+Besides this, the points followed a well defined curve that can be fitted with a asymptote:
+
+![fit_logn_lpt_inb_outb](https://user-images.githubusercontent.com/58682644/152421817-ec737379-969b-4d25-b963-b9171b3a428f.png)
+
+This shows that there is no problem with the biasing.
+
+**Normalisation factor evolution**
+
+I have modified CoLoRe to make it print the normalisation factor used when producing biased sources: 1 + delta_k = B_k/<B_k>. (I'm plotting this parameter).
+
+![mean_biased_density](https://user-images.githubusercontent.com/58682644/152422522-9980ee83-7445-4def-958f-e260185590ae.png)
+
+This evolution does not correlate with the fluctuations in the redshift distribution. 
+
+**Discusion about the old problems in the 2LPT correlations**
+
+Now that we are confident in our randoms we can continue with the previous steps.
+
+Continuing with the problematic 2LPT runs. Some of the ideas in order to try to understand the bad behaviour of 2LPT are:
+- [ ] Perform fits with no RSD and then show RSD plots with the previous fit.
+- [ ] Make no-cluster correlations for 2LPT (bias=0). (They worked perfectly for the CoLoRe paper mocks).
+- [ ] Check the cosmology is exactly the same as abacus.
+- [ ] Investigate the inclusion of 2LPT velocities.
+- [ ] Make wedges / rp vs rt plots trying to see where the 2LPT model is failing.
+
+**NEXT STEP**
+
+The checklist above.
+
+# 27/01/22
 
 **Check randoms: Redshift distribution**
 
@@ -34,12 +78,12 @@ Given this last plot, there is the question of whether there is no problem at al
 
 **NEXXT STEPS**
 
-- [ ] Check dndz poisson errors.
-- [ ] Check bias normalization evolution in redshift.
-- [ ] New 2LPT realisation with input biases around in_b=2.
+- [x] Check dndz poisson errors.
+- [x] Check bias normalization evolution in redshift.
+- [x] New 2LPT realisation with input biases around in_b=2.
 
 
-# 13/01/21
+# 13/01/22
 César generated a new 2LPT run with different randoms to check two things:
 - Whether a realisation with new randoms will still have the same slop in the bias_parameter vs effective_bias plot.
 - Show a plot with a wide range of bias values.
