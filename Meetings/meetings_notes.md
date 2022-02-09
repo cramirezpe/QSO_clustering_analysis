@@ -1,3 +1,54 @@
+# 09/02/22
+**non-clustered mocks**
+
+![unclustered_monopole](https://user-images.githubusercontent.com/58682644/153211844-a479c103-86c3-49d8-9ac2-00f5366f2e7f.png)
+![unclustered_quadrupole](https://user-images.githubusercontent.com/58682644/153211851-fd6bb35e-1838-4815-a192-c203775483c3.png)
+
+As expected, linear velocites are correctly captured by our linear model. Somehow the lognormal and 2lpt realisation have small differences that shouldn't be there (they should be totally identical in principle), but nothing to worry about.
+
+**compare again different biasing models**
+
+For this I returned to previous analyses of lyman-alpha like boxes. They have the following distributions:
+
+![high_3x2_600_distributions](https://user-images.githubusercontent.com/58682644/153213072-c557e7b4-56cc-4649-a5a7-f5b2d0db1aa3.png)
+
+And the results of the clustering measurements are:
+
+![high_3x2_600_monopole](https://user-images.githubusercontent.com/58682644/153213151-849e6727-b02c-4685-9155-b2d201ac765e.png)
+
+![high_3x2_600_quadrupole](https://user-images.githubusercontent.com/58682644/153213160-7935cfa4-9843-4b50-8286-893c84ada72a.png)
+
+It is curious that here the large-scale quadrupole seems to fit better the realisation by abacus than the previous runs that were built explicitly to match it (redshift and bias). 
+
+We need a snapshot analysis and not a lightcone analysis to get rid of redshift evolution that can break our measurements. We also need to make a fit of the monopole-noRSD and then show the model for monopole+quadrupole RSD using the previous fit to see the agreement. If the agreement is really bad, we could contact abacus to mention this and ask if their models perform better.
+
+**effective redshift of theory on different measurements**
+
+Changing the effective redshift changes the shape of the quadrupole having better agreement with theory:
+
+![narrow-z-effect-of-z-on-clustering-monopole](https://user-images.githubusercontent.com/58682644/153213525-a63120f0-1599-4b4d-ae28-334ecd1971d7.png)
+
+![narrow-z-effect-of-z-on-clustering-quadrupole](https://user-images.githubusercontent.com/58682644/153213597-fb64c2e5-84b5-479f-86ff-7e5f7ab6d113.png)
+
+This basically shows that the quadrupole is flexible when changing effective redshfit. However, we need to check if CoLoRe performs well for each redshift, and therefore we need to make a run with a snapshot.
+
+**b and z correlation in monopole-RSD**
+
+I was confused by the correlation between bias and effective redshift when fitting both in the monopole-RSD:
+
+![image](https://user-images.githubusercontent.com/58682644/153214286-b628063d-169c-4bdc-a7ad-c112b361a230.png)
+
+![z_and_b_effects](https://user-images.githubusercontent.com/58682644/153214245-e97d04e6-0850-48e1-948a-f6c7e2559c2e.png)
+
+The answer is that there is not such an issue, there is a dependence between bias and z, and hence the correlation. Even if the relation is not linear the correlation will be one in the fit.
+
+**NEXT STEPS**
+
+- [ ] Build a snapshot at redshfit 1.4 with CoLoRe
+- [ ] Perform fit of abacus without redshift and show performance of this fit with RSD clustering.
+- [ ] Check the cosmology is exactly the same as abacus (partially, they should be the same but I'd like to check more things)
+- [ ] Investigate the inclusion of 2LPT velocities (for the future).
+
 # 03/02/22
 **Repeating redshift distribution plot**
 
@@ -35,7 +86,7 @@ Now that we are confident in our randoms we can continue with the previous steps
 
 Continuing with the problematic 2LPT runs. Some of the ideas in order to try to understand the bad behaviour of 2LPT are:
 - [ ] Perform fits with no RSD and then show RSD plots with the previous fit.
-- [ ] Make no-cluster correlations for 2LPT (bias=0). (They worked perfectly for the CoLoRe paper mocks).
+- [x] Make no-cluster correlations for 2LPT (bias=0). (They worked perfectly for the CoLoRe paper mocks).
 - [ ] Check the cosmology is exactly the same as abacus.
 - [ ] Investigate the inclusion of 2LPT velocities.
 - [ ] Make wedges / rp vs rt plots trying to see where the 2LPT model is failing.
