@@ -1,3 +1,24 @@
+# 09/03/22
+**snapshot**
+I am having issues to run the snapshot realisation of CoLoRe for 2LPT mocks. I was able to run on lognormal (+ unclustered 2LPT). But 2LPT fails with both noRSD and RSD.
+
+We took a look at the code, and it is important to make changes to how this modification is made:
+- Generate new functions with new names for growth_factor, etc..
+- I am currently modifying density.c, it is better not to modify this and keep changes in the other functions (cosmo.c).
+- Make this new functions just return a hardcoded value, at first. This could be get by running a CoLoRe realisation which prints all the values for all redshfits.
+- Andreu mentioned that the fact that voxel sizes will depend on redshift, there will always be a redshift dependence in the box that we won't be able to kill. Marc thinks this effect won't be relevant.
+
+**unable to give predictions to 2LPT code now**
+It seems that the 2LPT quadrupole signal cannot be explained with a "normal" range of redshifts. Recalling a previous plot:
+![best_redshift](https://user-images.githubusercontent.com/58682644/153213597-fb64c2e5-84b5-479f-86ff-7e5f7ab6d113.png)
+It seems that we need a really high value of redshift in order to be able to explain this behaviour. Hence making a snapshot or choosing a good value of effective redshfit won't be enough to explain the high differences (in principle).
+This is something to think about. Maybe it is caused by the fact that we are combining 2LPT objects with linear velocities?
+
+**TODO**
+- [ ] Make changes to the snapshot code.
+- [ ] Marc asked for a realisation with bias=1 (the same as the underlying dark matter). This requires to remove the density normalization in order to not modify the underlying value.
+
+
 # 09/02/22
 **non-clustered mocks**
 
